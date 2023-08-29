@@ -8,3 +8,4 @@ Then we use the formula for the curvature of a curve at a particular point based
 
 To determine the speed of the vehicle we will also experiment with using the curvature. By offsetting the curvature by a certain amount we can get a rough estimate of where the vehicle should be braking and accelerating.
 ![curvature](fig/budapest_curvature.svg)
+**Figure 1:** Example of the braking and accelerating points based on the curvature of the track offset by 10.
