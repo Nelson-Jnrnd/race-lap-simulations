@@ -1,6 +1,5 @@
 from math import pi
 
-
 # The `Engine` class represents an engine with gears and a differential, and provides methods to
 # calculate torque and force at the wheels based on the engine's RPM and gear ratio.
 class Engine:
@@ -36,11 +35,15 @@ class Engine:
         self.ratio_gears = ratio_gears
         self.ratio_differential = ratio_differential
         self.torque_output = torque_output
-
-        self.gear = 1
-        self._rpm = idle_rpm
+        self.idle_rpm = idle_rpm
         self.max_rpm = max_rpm
         self.min_rpm = min_rpm
+
+        self.reset()
+
+    def reset(self):
+        self._set_rpm(self.idle_rpm)
+        self.gear = 1
 
     def _set_rpm(self, value):
         '''The function `_set_rpm` sets the value of `_rpm` within the range of `min_rpm` and `max_rpm`.
@@ -53,31 +56,22 @@ class Engine:
         
         '''
         value = max(self.min_rpm, min(self.max_rpm, value))
-        self._rpm = value
+        self._rpm = round(value)
         
-    def torque_wheel(self, rpm):
+    def torque_wheel(self):
         '''The function calculates the torque at the wheel based on the given RPM and the gear ratio.
-        
-        Parameters
-        ----------
-        rpm
-            The parameter "rpm" represents the revolutions per minute of the wheel.
-        
         Returns
         -------
             the torque of the wheel.
         
         '''
-        return self.torque_output(rpm) * self.ratio_gears[self.gear - 1]
+        return self.torque_output(self._rpm) * self.ratio_gears[self.gear - 1]
     
-    def force_wheel(self, rpm, radius_wheel):
+    def force_wheel(self, radius_wheel):
         '''The function calculates the force exerted by a wheel given its RPM and radius.
         
         Parameters
         ----------
-        rpm
-            The rpm parameter represents the revolutions per minute of the wheel. It indicates how many times
-        the wheel completes a full revolution in one minute.
         radius_wheel
             The radius of the wheel.
         
@@ -87,4 +81,7 @@ class Engine:
         radius of the wheel.
         
         '''
-        return self.torque_wheel(rpm) / radius_wheel
+        return self.torque_wheel() / radius_wheel
+    
+    def update_rpm(self, radius_wheel, speed):
+        self._set_rpm((speed * self.ratio_gears[self.gear - 1] * self.ratio_differential * 60) / (2 * pi * radius_wheel))
