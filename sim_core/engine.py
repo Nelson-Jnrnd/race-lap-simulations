@@ -1,7 +1,5 @@
 from math import pi
 
-# The `Engine` class represents an engine with gears and a differential, and provides methods to
-# calculate torque and force at the wheels based on the engine's RPM and gear ratio.
 class Engine:
 
     def __init__(self, ratio_gears, ratio_differential, torque_output, min_rpm, max_rpm, idle_rpm):
@@ -42,6 +40,9 @@ class Engine:
         self.reset()
 
     def reset(self):
+        '''The `reset` function sets the RPM to the idle RPM and sets the gear to 1.
+        
+        '''
         self._set_rpm(self.idle_rpm)
         self.gear = 1
 
@@ -84,12 +85,30 @@ class Engine:
         return self.torque_wheel() / radius_wheel
     
     def update_rpm(self, radius_wheel, speed):
+        '''The function calculates and updates the RPM (revolutions per minute) based on the given radius
+        of the wheel and speed.
+        
+        Parameters
+        ----------
+        radius_wheel
+            The radius of the wheel in meters.
+        speed
+            The speed parameter represents the speed of the vehicle in meters per second.
+        
+        '''
         self._set_rpm((speed * self.ratio_gears[self.gear - 1] * self.ratio_differential * 60) / (2 * pi * radius_wheel))
     
     def upshift(self):
+        '''The function "upshift" increases the gear value by 1 if it is less than the length of the
+        ratio_gears list.
+        
+        '''
         if self.gear < len(self.ratio_gears):
             self.gear += 1
     
     def downshift(self):
+        '''The function decreases the gear value by 1 if it is greater than 1.
+        
+        '''
         if self.gear > 1:
             self.gear -= 1
