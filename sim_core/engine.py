@@ -85,3 +85,11 @@ class Engine:
     
     def update_rpm(self, radius_wheel, speed):
         self._set_rpm((speed * self.ratio_gears[self.gear - 1] * self.ratio_differential * 60) / (2 * pi * radius_wheel))
+    
+    def upshift(self):
+        if self.gear < len(self.ratio_gears):
+            self.gear += 1
+    
+    def downshift(self):
+        if self.gear > 1:
+            self.gear -= 1
