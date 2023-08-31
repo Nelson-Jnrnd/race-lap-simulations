@@ -56,6 +56,9 @@ $$
 
 Where $a$, $b$ and $c$ are constant that define the torque curve. We can adjust them depending on the engine characteristics.
 
+![torque_output](fig/engine_torque_curve.svg)
+This is the example of a torque curve using the following formula. The parabolic nature of the function requires that we limit the rpms (5500 to 6000 for this example).  
+
 ##### Gear Ratio
 
 The car has $N$ gears in it’s transmission, each multiplying the torque output by a specific amount. For exemple of a transmission with 6 gears we can have : 
@@ -63,6 +66,9 @@ The car has $N$ gears in it’s transmission, each multiplying the torque output
 $$
 R_g=[3.5, 2.8, 2.1, 1.7, 1.3, 1]
 $$
+
+![performance_by_gear](fig/engine_performance_all_gear.svg)
+Here is the simulated engine performance for a 700 kg car (drag ignored). The performances of the different gears seems to be working as intended.
 
 ##### Wheel Torque
 
