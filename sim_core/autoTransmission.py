@@ -15,8 +15,11 @@ class AutoTransmission:
         self.shift_up_rpm = shift_up_rpm
         self.shift_down_rpm = shift_down_rpm
 
-    def drive(self):
-        if self.previous_rpm < self.engine._rpm and self.shift_up_rpm < self.engine._rpm:
+    def update(self):
+        '''The function updates the gear of the engine based on the current and previous RPM values.
+        
+        '''
+        if self.shift_up_rpm < self.engine._rpm:
             self.engine.upshift()
-        elif self.previous_rpm > self.engine._rpm and self.shift_down_rpm > self.engine._rpm:
+        elif self.shift_down_rpm > self.engine._rpm:
             self.engine.downshift()
