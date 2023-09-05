@@ -159,3 +159,16 @@ d=g\times G
 $$
 
 Where $g$ is the grip, $G$ is the gravitational acceleration (9.81)
+
+#### Grip Max Force
+There is a maximum force that can be applied to a tire before it starts slipping. This value depends on the grip coefficient of the tire and the one of the surface the car is on.
+It's given by :
+$$
+F_{friction}=μ\times F_{normal}
+$$
+$\mu$ is the coefficient of friction of the surface and $F_{normal}$ is the perpendicular force applied on the wheels (in other words the weight of the car).
+https://www.engineeringtoolbox.com/tractive-effort-d_1783.html
+
+Here $\mu$ is the grip of the car, a combination of the grip allowed by the surface and the tires.
+
+

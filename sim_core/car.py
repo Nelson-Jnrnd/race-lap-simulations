@@ -40,3 +40,6 @@ class Car:
         acceleration = force_engine / self.mass
         self.speed += acceleration * delta_t
         self.engine.update_rpm(self.radius_wheel, self.speed)
+    
+    def force_wheel(self):
+        return self.engine.force_wheel(self.radius_wheel)
