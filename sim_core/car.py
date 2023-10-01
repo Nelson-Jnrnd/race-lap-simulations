@@ -23,6 +23,7 @@ class Car:
         
         '''
         self.speed = 0
+        self.__throttle = 0
         self.engine.reset()
 
     def accelerate(self, delta_t):
@@ -36,10 +37,13 @@ class Car:
         speed over a given time interval.
         
         '''
-        force_engine = self.engine.force_wheel(self.radius_wheel)
+        force_engine = self.engine.force_wheel(self.radius_wheel, self.__throttle)
         acceleration = force_engine / self.mass
         self.speed += acceleration * delta_t
         self.engine.update_rpm(self.radius_wheel, self.speed)
     
     def force_wheel(self):
         return self.engine.force_wheel(self.radius_wheel)
+    
+    def set_throttle(self, ratio):
+        self.__throttle = ratio

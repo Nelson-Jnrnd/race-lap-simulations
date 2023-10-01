@@ -30,11 +30,7 @@ Should we separate the car performance for the simulation in parts we could have
 
 #### Power Unit
 
-##### Engine Power
-
 The engine, the main driving force of the car, will affect the acceleration and the top speed. Although both of those characteristic will rely on other factors such as the weight and the drag coefficient.
-
-Let’s say a first that the engine power is modelled as a single unit $P$, number of watts outputted by the engine.
 
 ##### RPM
 
@@ -48,8 +44,9 @@ Where $v$ is the speed, $R_g$ is the ratio of the gear selected, $R_d$ is the ra
 
 ##### Torque Output
 
-Engines have a specific torque curve, which is a graph of the engine's torque output at different RPMs. A quadratic function can represent this:
+Engines have a specific torque curve, which is a graph of the engine's torque output at different RPMs. This curve can be used to determine the engine's force output at different speeds.
 
+A quadratic function can represent this:
 $$
 T_{engine}(RPM)=a\times RPM^2+b\times RPM+c
 $$
@@ -75,8 +72,9 @@ Here is the simulated engine performance for a 700 kg car (drag ignored). The pe
 The torque transferred to the wheels is the engine torque multiplied by the selected gear ratio :
 
 $$
-T_{wheel}=T_{engine}\times R_g[i]
+T_{wheel}=T_{engine}\times R_g[i] \times P_t
 $$
+Where $P_t$ is the throttle pressure between 0 and 1.
 
 ##### Wheel Force
 
@@ -85,6 +83,9 @@ Then, the force transferred from the wheel to the ground depends on the radius o
 $$
 F_{wheel}=\frac{T_{wheel}}{r_{wheel}}
 $$
+
+![wheel_force](fig/wheel_forces.svg)
+This graph shows an example of the forces applied on the wheels over a 100 seconds acceleration.
 
 #### Weight
 
@@ -108,9 +109,11 @@ Where $a$, $b$ and $c$ are constants that define the aerodynamic profile of the 
 
 The tires have a certain amount of grip it can provide to the car before it starts slipping. This limits the car ability to accelerate, decelerate and turn.
 
-It is noted $G$ and varies between 0 (no grip) and 1 (maximum grip). It can varies depending on factors such as tire compound, tire life, tire temperature, track surface etc.
+It is noted $G$ and varies between 0 (no grip) and 1 (maximum grip). It can vary depending on factors such as tire compound, tire life, tire temperature, track surface etc.
 
 ##### Tire Compound
+
+
 
 | Soft | Medium | Hard | Intermediate | Wet |
 | --- | --- | --- | --- | --- |

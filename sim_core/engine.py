@@ -59,22 +59,26 @@ class Engine:
         value = max(self.min_rpm, min(self.max_rpm, value))
         self._rpm = round(value)
         
-    def torque_wheel(self):
+    def torque_wheel(self, throttle):
         '''The function calculates the torque at the wheel based on the given RPM and the gear ratio.
+        throttle
+            The throttle parameters represent the pressure on the throttle pedal between 0 and 1.
         Returns
         -------
             the torque of the wheel.
         
         '''
-        return self.torque_output(self._rpm) * self.ratio_gears[self.gear - 1]
+        return self.torque_output(self._rpm) * self.ratio_gears[self.gear - 1] * throttle
     
-    def force_wheel(self, radius_wheel):
+    def force_wheel(self, radius_wheel, throttle):
         '''The function calculates the force exerted by a wheel given its RPM and radius.
         
         Parameters
         ----------
         radius_wheel
             The radius of the wheel.
+        throttle
+            The throttle parameters represent the pressure on the throttle pedal between 0 and 1.
         
         Returns
         -------
@@ -82,7 +86,7 @@ class Engine:
         radius of the wheel.
         
         '''
-        return self.torque_wheel() / radius_wheel
+        return self.torque_wheel(throttle) / radius_wheel
     
     def update_rpm(self, radius_wheel, speed):
         '''The function calculates and updates the RPM (revolutions per minute) based on the given radius
