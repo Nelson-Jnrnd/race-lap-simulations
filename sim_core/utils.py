@@ -14,6 +14,9 @@ def ms_to_kph(speed_ms):
     '''
     return 3.6 * speed_ms
 
+def kph_to_ms(speed_kph):
+    return speed_kph / 3.6
+
 
 def example_torque_curve(rpm):
     '''The function calculates the torque based on the given RPM using a quadratic equation.
