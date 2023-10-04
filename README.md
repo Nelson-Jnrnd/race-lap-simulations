@@ -77,6 +77,7 @@ The torque transferred to the wheels is the engine torque multiplied by the sele
 $$
 T_{wheel}=T_{engine}\times R_g[i] \times P_t
 $$
+
 Where $P_t$ is the throttle pressure between 0 and 1.
 
 ##### Wheel Force
