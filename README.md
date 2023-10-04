@@ -47,6 +47,7 @@ Where $v$ is the speed, $R_g$ is the ratio of the gear selected, $R_d$ is the ra
 Engines have a specific torque curve, which is a graph of the engine's torque output at different RPMs. This curve can be used to determine the engine's force output at different speeds.
 
 A quadratic function can represent this:
+
 $$
 T_{engine}(RPM)=a\times RPM^2+b\times RPM+c
 $$
@@ -54,6 +55,7 @@ $$
 Where $a$, $b$ and $c$ are constant that define the torque curve. We can adjust them depending on the engine characteristics.
 
 ![torque_output](fig/engine_torque_curve.svg)
+
 This is the example of a torque curve using the following formula. The parabolic nature of the function requires that we limit the rpms (5500 to 6000 for this example).  
 
 ##### Gear Ratio
@@ -65,6 +67,7 @@ R_g=[3.5, 2.8, 2.1, 1.7, 1.3, 1]
 $$
 
 ![performance_by_gear](fig/engine_performance_all_gear.svg)
+
 Here is the simulated engine performance for a 700 kg car (drag ignored). The performances of the different gears seems to be working as intended.
 
 ##### Wheel Torque
@@ -85,6 +88,7 @@ F_{wheel}=\frac{T_{wheel}}{r_{wheel}}
 $$
 
 ![wheel_force](fig/wheel_forces.svg)
+
 This graph shows an example of the forces applied on the wheels over a 100 seconds acceleration.
 
 #### Weight
@@ -166,9 +170,11 @@ Where $g$ is the grip, $G$ is the gravitational acceleration (9.81)
 #### Grip Max Force
 There is a maximum force that can be applied to a tire before it starts slipping. This value depends on the grip coefficient of the tire and the one of the surface the car is on.
 It's given by :
+
 $$
 F_{friction}=μ\times F_{normal}
 $$
+
 $\mu$ is the coefficient of friction of the surface and $F_{normal}$ is the perpendicular force applied on the wheels (in other words the weight of the car).
 https://www.engineeringtoolbox.com/tractive-effort-d_1783.html
 
