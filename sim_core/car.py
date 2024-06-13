@@ -1,5 +1,7 @@
+from sim_core.utils import ms_to_kph
+
 class Car:
-    def __init__(self, mass, radius_wheel, engine):
+    def __init__(self, mass, radius_wheel, engine, front_wing, tire):
         '''The function initializes the attributes of an object and calls the reset method.
         
         Parameters
@@ -15,7 +17,9 @@ class Car:
         '''
         self.mass = mass
         self.radius_wheel = radius_wheel
+        self.front_wing = front_wing
         self.engine = engine
+        self.tire = tire
         self.reset()
 
     def reset(self):
@@ -38,12 +42,23 @@ class Car:
         
         '''
         force_engine = self.engine.force_wheel(self.radius_wheel, self.__throttle)
-        acceleration = force_engine / self.mass
+        drag = self.front_wing.get_drag(ms_to_kph(self.speed))
+        net_force = force_engine - drag
+        grip_limitation = self.tire.get_grip() * self.mass # todo acount for downforce
+        print("Grip : ", self.tire.get_grip(), " Grip limitation: ", grip_limitation)
+        print("net force: ", net_force)
+        if grip_limitation < net_force:
+            print("Grip limitation reached")
+        net_force = min(net_force, grip_limitation)
+        acceleration = net_force / self.mass
         self.speed += acceleration * delta_t
         self.engine.update_rpm(self.radius_wheel, self.speed)
     
     def force_wheel(self):
-        return self.engine.force_wheel(self.radius_wheel)
+        return self.engine.force_wheel(self.radius_wheel, self.__throttle)
     
     def set_throttle(self, ratio):
         self.__throttle = ratio
+    
+    def get_weight(self):
+        return self.mass * 9.81
